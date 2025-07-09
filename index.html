@@ -47,9 +47,14 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-	  padding-top: 40px; /* adjust as needed */
+      padding-top: 40px;
       padding: 20px;
       text-align: center;
+      transition: opacity 0.6s ease;
+    }
+
+    #introOverlay.hide {
+      opacity: 0;
     }
 
     #startBtn {
@@ -61,6 +66,22 @@
       border: none;
       border-radius: 8px;
       cursor: pointer;
+    }
+
+    #githubCredit {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+      z-index: 10;
+      color: white;
+      font-size: 14px;
+      text-align: right;
+      transition: transform 0.6s ease, opacity 0.6s ease;
+    }
+
+    #githubCredit.hide {
+      transform: translateY(-40px);
+      opacity: 0;
     }
   </style>
 </head>
@@ -86,6 +107,13 @@
     </p>
 
     <button id="startBtn">▶️ Start Game</button>
+
+    <div id="githubCredit">
+      <p style="margin: 0;">🔐 No worries, just fun!</p>
+      <a href="https://github.com/funnyone7436/Dance-with-Minecraft-block" target="_blank" style="color:#0ff; text-decoration:none;">
+        🔍 View the full source on GitHub
+      </a>
+    </div>
   </div>
 
   <div id="poseWrapper">
@@ -96,6 +124,18 @@
   <script type="module" src="main.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.4/pose.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+
+  <script>
+    document.getElementById('startBtn').addEventListener('click', () => {
+      const overlay = document.getElementById('introOverlay');
+      const credit = document.getElementById('githubCredit');
+      overlay.classList.add('hide');
+      credit.classList.add('hide');
+      setTimeout(() => {
+        overlay.style.display = 'none';
+      }, 600);
+    });
+  </script>
 
 </body>
 </html>
