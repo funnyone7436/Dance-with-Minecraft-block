@@ -1,7 +1,9 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
 import * as CANNON from 'https://cdn.jsdelivr.net/npm/cannon-es@0.20.0/dist/cannon-es.js';
 
-console.log("🔥 main.js loaded with gesture & walls");
+let showGestureDots = true;
+
+//console.log("🔥 main.js loaded with gesture & walls");
 
 // Scene Setup
 const scene = new THREE.Scene();
@@ -200,11 +202,11 @@ function animate() {
 
 // Shake Effect
 function triggerShakeEffect() {
-  console.log("🌍 Gentle quake triggered...");
+//  console.log("🌍 Gentle quake triggered...");
   wallBodies.forEach(body => {
     if (body.mass > 0) {
       const joltX = (Math.random() - 0.5) * 0.8;
-      const joltY = Math.random() * 0.6 + 1;
+      const joltY = Math.random() * 0.8 + 1;
       const joltZ = (Math.random() - 0.5) * 0.8;
       body.applyImpulse(new CANNON.Vec3(joltX, joltY, joltZ));
     }
@@ -285,16 +287,23 @@ function onResults(results) {
 
 function drawPoseLandmarks(landmarks) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  if (!landmarks) return;
+  if (!landmarks || !showGestureDots) return;
 
   ctx.save();
   ctx.fillStyle = 'lime';
-  for (let i = 0; i < landmarks.length; i++) {
-    const x = landmarks[i].x * canvas.width;
-    const y = landmarks[i].y * canvas.height;
+  for (const lm of landmarks) {
+    const x = lm.x * canvas.width;
+    const y = lm.y * canvas.height;
     ctx.beginPath();
     ctx.arc(x, y, 4, 0, Math.PI * 2);
     ctx.fill();
   }
   ctx.restore();
 }
+
+document.getElementById('toggleDotsBtn').addEventListener('click', () => {
+  showGestureDots = !showGestureDots;
+  document.getElementById('toggleDotsBtn').textContent =
+    showGestureDots ? '🔍 Hide Gesture Dots' : '🛑 Show Gesture Dots';
+});
+
