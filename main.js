@@ -300,10 +300,8 @@ function drawPoseLandmarks(landmarks) {
   }
   ctx.restore();
 }
-
 document.getElementById('toggleDotsBtn').addEventListener('click', () => {
   showGestureDots = !showGestureDots;
   document.getElementById('toggleDotsBtn').textContent =
     showGestureDots ? '🔍 Hide Gesture Dots' : '🛑 Show Gesture Dots';
 });
-
