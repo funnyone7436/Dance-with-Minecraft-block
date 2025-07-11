@@ -68,17 +68,6 @@
       cursor: pointer;
     }
 
-  <button id="toggleDotsBtn" style="
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1001;
-    display: none;
-   ">
-  🔍 Hide Gesture Dots
-</button>
-
-
     #githubCredit {
       position: absolute;
       bottom: 80px;
@@ -96,6 +85,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <div id="introOverlay">
@@ -131,6 +121,11 @@
     <video id="video" autoplay muted playsinline style="display:none;"></video>
     <canvas id="overlay" width="640" height="480"></canvas>
   </div>
+
+  <!-- ✅ FIXED Button placement -->
+  <button id="toggleDotsBtn" style="position:fixed; top:20px; right:20px; z-index:1001;">
+    🔍 Hide Gesture Dots
+  </button>
 
   <script type="module" src="main.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.4/pose.js"></script>
